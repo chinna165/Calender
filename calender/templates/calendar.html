@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container calendar-container">
+        <h1 class="text-center">Calendar for {{ month_name }} {{ year }}</h1>
+        <form method="get" class="form-inline justify-content-center">
+            <div class="form-group mx-2">
+                <label for="month" class="mr-2">Month:</label>
+                <select id="month" name="month" class="form-control">
+                    {% for month in months %}
+                        <option value="{{ loop.index }}" {% if loop.index == month %}selected{% endif %}>
+                            {{ month }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mx-2">
+                <label for="year" class="mr-2">Year:</label>
+                <input type="number" id="year" name="year" class="form-control" value="{{ year }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Show Calendar</button>
+        </form>
+        <div class="table-responsive">
+            {{ month_calendar|safe }}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
